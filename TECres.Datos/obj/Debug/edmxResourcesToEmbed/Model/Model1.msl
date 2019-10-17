@@ -159,6 +159,7 @@
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="costo_diario" ColumnName="costo_diario" />
           <ScalarProperty Name="id_anuncio" ColumnName="id_anuncio" />
+          <ScalarProperty Name="Duracion" ColumnName="Duracion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -192,31 +193,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="Filtros" FunctionName="TECresModel.Store.Filtros">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="TECresModel.Filtros_Result">
-          <ScalarProperty Name="foto_principal" ColumnName="foto_principal" />
-          <ScalarProperty Name="provincia" ColumnName="provincia" />
-          <ScalarProperty Name="canton" ColumnName="canton" />
-          <ScalarProperty Name="distrito" ColumnName="distrito" />
-          <ScalarProperty Name="precio" ColumnName="precio" />
-          <ScalarProperty Name="tamano_construccion" ColumnName="tamano_construccion" />
-          <ScalarProperty Name="tamano_terreno" ColumnName="tamano_terreno" />
-          <ScalarProperty Name="id_propiedad" ColumnName="id_propiedad" />
-          <ScalarProperty Name="titulo" ColumnName="titulo" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="ObtenerCantones" FunctionName="TECresModel.Store.ObtenerCantones" />
-    <FunctionImportMapping FunctionImportName="ObtenerDistritos" FunctionName="TECresModel.Store.ObtenerDistritos" />
-    <FunctionImportMapping FunctionImportName="Fotos_Secundarias" FunctionName="TECresModel.Store.Fotos_Secundarias">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="TECresModel.Fotos_Secundarias_Result">
-          <ScalarProperty Name="direccion" ColumnName="direccion" />
-          <ScalarProperty Name="id_propiedad" ColumnName="id_propiedad" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Anunciosporaprobar" FunctionName="TECresModel.Store.Anunciosporaprobar">
       <ResultMapping>
         <ComplexTypeMapping TypeName="TECresModel.Anunciosporaprobar_Result">
@@ -233,6 +209,90 @@
           <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
           <ScalarProperty Name="id_propiedad" ColumnName="id_propiedad" />
           <ScalarProperty Name="precio" ColumnName="precio" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Filtros" FunctionName="TECresModel.Store.Filtros">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TECresModel.Filtros_Result">
+          <ScalarProperty Name="foto_principal" ColumnName="foto_principal" />
+          <ScalarProperty Name="provincia" ColumnName="provincia" />
+          <ScalarProperty Name="canton" ColumnName="canton" />
+          <ScalarProperty Name="distrito" ColumnName="distrito" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="tamano_construccion" ColumnName="tamano_construccion" />
+          <ScalarProperty Name="tamano_terreno" ColumnName="tamano_terreno" />
+          <ScalarProperty Name="id_propiedad" ColumnName="id_propiedad" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Fotos_Secundarias" FunctionName="TECresModel.Store.Fotos_Secundarias">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TECresModel.Fotos_Secundarias_Result">
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="id_propiedad" ColumnName="id_propiedad" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ObtenerCantones" FunctionName="TECresModel.Store.ObtenerCantones" />
+    <FunctionImportMapping FunctionImportName="ObtenerDistritos" FunctionName="TECresModel.Store.ObtenerDistritos" />
+    <FunctionImportMapping FunctionImportName="ReporteVentas" FunctionName="TECresModel.Store.ReporteVentas">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TECresModel.ReporteVentas_Result">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Monto_Facturado" ColumnName="Monto_Facturado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="TECresModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="TECresModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="TECresModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="TECresModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TECresModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="TECresModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TECresModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="TECresModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="TECresModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="ReporteVencer" FunctionName="TECresModel.Store.ReporteVencer">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TECresModel.ReporteVencer_Result">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+          <ScalarProperty Name="Vence" ColumnName="Vence" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Comisiones" FunctionName="TECresModel.Store.Comisiones">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TECresModel.Comisiones_Result">
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Inicio" ColumnName="Inicio" />
+          <ScalarProperty Name="Fin" ColumnName="Fin" />
+          <ScalarProperty Name="Modalidad" ColumnName="Modalidad" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Publico" ColumnName="Publico" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="CostoAnuncio" ColumnName="CostoAnuncio" />
+          <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+          <ScalarProperty Name="Comision" ColumnName="Comision" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

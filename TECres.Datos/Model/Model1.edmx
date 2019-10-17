@@ -155,6 +155,7 @@
           <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="costo_diario" Type="float" />
           <Property Name="id_anuncio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Duracion" Type="int" />
         </EntityType>
         <EntityType Name="Tipo_Inmueble">
           <Key>
@@ -436,12 +437,14 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="Anunciosporaprobar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Comisiones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Filtros" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Habitaciones" Type="int" Mode="In" />
           <Parameter Name="PrecioMin" Type="int" Mode="In" />
           <Parameter Name="PrecioMax" Type="int" Mode="In" />
           <Parameter Name="Ubicacion" Type="int" Mode="In" />
         </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="Fotos_Secundarias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_propiedad" Type="int" Mode="In" />
         </Function>
@@ -452,6 +455,41 @@
           <Parameter Name="Provincia" Type="varchar" Mode="In" />
           <Parameter Name="Canton" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="ReporteVencer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ReporteVentas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="inicio" Type="date" Mode="In" />
+          <Parameter Name="fin" Type="date" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="TECresModelStoreContainer">
           <EntitySet Name="Administrador" EntityType="Self.Administrador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Anuncio" EntityType="Self.Anuncio" Schema="dbo" store:Type="Tables" />
@@ -742,6 +780,7 @@
           <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="costo_diario" Type="Double" />
           <Property Name="id_anuncio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Duracion" Type="Int32" />
           <NavigationProperty Name="Anuncio" Relationship="Self.FK_TIPOANUNCIO" FromRole="Tipo_anuncio" ToRole="Anuncio" />
         </EntityType>
         <EntityType Name="Tipo_Inmueble">
@@ -1131,11 +1170,15 @@
             <End Role="Ubicacion" EntitySet="Ubicacion" />
             <End Role="Publico" EntitySet="Publico" />
           </AssociationSet>
+          <FunctionImport Name="Anunciosporaprobar" ReturnType="Collection(TECresModel.Anunciosporaprobar_Result)" />
           <FunctionImport Name="Filtros" ReturnType="Collection(TECresModel.Filtros_Result)">
             <Parameter Name="Habitaciones" Mode="In" Type="Int32" />
             <Parameter Name="PrecioMin" Mode="In" Type="Int32" />
             <Parameter Name="PrecioMax" Mode="In" Type="Int32" />
             <Parameter Name="Ubicacion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Fotos_Secundarias" ReturnType="Collection(TECresModel.Fotos_Secundarias_Result)">
+          <Parameter Name="id_propiedad" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ObtenerCantones" ReturnType="Collection(String)">
           <Parameter Name="Provincia" Mode="In" Type="String" />
@@ -1144,11 +1187,58 @@
             <Parameter Name="Provincia" Mode="In" Type="String" />
             <Parameter Name="Canton" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="Fotos_Secundarias" ReturnType="Collection(TECresModel.Fotos_Secundarias_Result)">
-          <Parameter Name="id_propiedad" Mode="In" Type="Int32" />
+          <FunctionImport Name="ReporteVentas" ReturnType="Collection(TECresModel.ReporteVentas_Result)">
+            <Parameter Name="inicio" Mode="In" Type="DateTime" />
+            <Parameter Name="fin" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="Anunciosporaprobar" ReturnType="Collection(TECresModel.Anunciosporaprobar_Result)" />
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(TECresModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(TECresModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="ReporteVencer" ReturnType="Collection(TECresModel.ReporteVencer_Result)" />
+          <FunctionImport Name="Comisiones" ReturnType="Collection(TECresModel.Comisiones_Result)" />
         </EntityContainer>
+        <ComplexType Name="Anunciosporaprobar_Result">
+          <Property Type="String" Name="modalidad" Nullable="false" MaxLength="30" />
+          <Property Type="DateTime" Name="inicio" Nullable="false" />
+          <Property Type="DateTime" Name="fin" Nullable="false" />
+          <Property Type="String" Name="tarjeta_credito" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="titulo" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="visitas" Nullable="false" />
+          <Property Type="Int32" Name="vendedor" Nullable="false" />
+          <Property Type="Int32" Name="aprobado_por" Nullable="true" />
+          <Property Type="Int32" Name="publico" Nullable="false" />
+          <Property Type="String" Name="tipo_anuncio" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="id_cliente" Nullable="false" />
+          <Property Type="Int32" Name="id_propiedad" Nullable="false" />
+          <Property Type="Double" Name="precio" Nullable="false" />
+        </ComplexType>
         <ComplexType Name="Filtros_Result">
           <Property Type="String" Name="foto_principal" Nullable="false" MaxLength="150" />
           <Property Type="String" Name="provincia" Nullable="false" MaxLength="50" />
@@ -1164,20 +1254,39 @@
           <Property Type="String" Name="direccion" Nullable="false" MaxLength="150" />
           <Property Type="Int32" Name="id_propiedad" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="Anunciosporaprobar_Result">
-          <Property Type="String" Name="modalidad" Nullable="false" MaxLength="30" />
-          <Property Type="DateTime" Name="inicio" Nullable="false" />
-          <Property Type="DateTime" Name="fin" Nullable="false" />
-          <Property Type="String" Name="tarjeta_credito" Nullable="false" MaxLength="30" />
-          <Property Type="String" Name="titulo" Nullable="false" MaxLength="100" />
-          <Property Type="Int32" Name="visitas" Nullable="false" />
-          <Property Type="Int32" Name="vendedor" Nullable="false" />
-          <Property Type="Int32" Name="aprobado_por" Nullable="true" />
-          <Property Type="Int32" Name="publico" Nullable="false" />
-          <Property Type="String" Name="tipo_anuncio" Nullable="false" MaxLength="20" />
-          <Property Type="Int32" Name="id_cliente" Nullable="false" />
-          <Property Type="Int32" Name="id_propiedad" Nullable="false" />
-          <Property Type="Double" Name="precio" Nullable="false" />
+        <ComplexType Name="ReporteVentas_Result">
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="62" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="30" />
+          <Property Type="Double" Name="Monto_Facturado" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ReporteVencer_Result">
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="62" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="Vendedor" Nullable="false" />
+          <Property Type="DateTime" Name="Vence" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Comisiones_Result">
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="Inicio" Nullable="false" />
+          <Property Type="DateTime" Name="Fin" Nullable="false" />
+          <Property Type="String" Name="Modalidad" Nullable="false" MaxLength="30" />
+          <Property Type="Double" Name="Precio" Nullable="false" />
+          <Property Type="Int32" Name="Publico" Nullable="false" />
+          <Property Type="String" Name="Tipo" Nullable="false" MaxLength="20" />
+          <Property Type="Double" Name="CostoAnuncio" Nullable="true" />
+          <Property Type="String" Name="Vendedor" Nullable="false" MaxLength="62" />
+          <Property Type="Double" Name="Comision" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1343,6 +1452,7 @@
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="costo_diario" ColumnName="costo_diario" />
                 <ScalarProperty Name="id_anuncio" ColumnName="id_anuncio" />
+                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1376,31 +1486,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="Filtros" FunctionName="TECresModel.Store.Filtros">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="TECresModel.Filtros_Result">
-                <ScalarProperty Name="foto_principal" ColumnName="foto_principal" />
-                <ScalarProperty Name="provincia" ColumnName="provincia" />
-                <ScalarProperty Name="canton" ColumnName="canton" />
-                <ScalarProperty Name="distrito" ColumnName="distrito" />
-                <ScalarProperty Name="precio" ColumnName="precio" />
-                <ScalarProperty Name="tamano_construccion" ColumnName="tamano_construccion" />
-                <ScalarProperty Name="tamano_terreno" ColumnName="tamano_terreno" />
-                <ScalarProperty Name="id_propiedad" ColumnName="id_propiedad" />
-                <ScalarProperty Name="titulo" ColumnName="titulo" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ObtenerCantones" FunctionName="TECresModel.Store.ObtenerCantones" />
-          <FunctionImportMapping FunctionImportName="ObtenerDistritos" FunctionName="TECresModel.Store.ObtenerDistritos" />
-          <FunctionImportMapping FunctionImportName="Fotos_Secundarias" FunctionName="TECresModel.Store.Fotos_Secundarias">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="TECresModel.Fotos_Secundarias_Result">
-                <ScalarProperty Name="direccion" ColumnName="direccion" />
-                <ScalarProperty Name="id_propiedad" ColumnName="id_propiedad" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Anunciosporaprobar" FunctionName="TECresModel.Store.Anunciosporaprobar">
             <ResultMapping>
               <ComplexTypeMapping TypeName="TECresModel.Anunciosporaprobar_Result">
@@ -1417,6 +1502,90 @@
                 <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
                 <ScalarProperty Name="id_propiedad" ColumnName="id_propiedad" />
                 <ScalarProperty Name="precio" ColumnName="precio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Filtros" FunctionName="TECresModel.Store.Filtros">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TECresModel.Filtros_Result">
+                <ScalarProperty Name="foto_principal" ColumnName="foto_principal" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="canton" ColumnName="canton" />
+                <ScalarProperty Name="distrito" ColumnName="distrito" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="tamano_construccion" ColumnName="tamano_construccion" />
+                <ScalarProperty Name="tamano_terreno" ColumnName="tamano_terreno" />
+                <ScalarProperty Name="id_propiedad" ColumnName="id_propiedad" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Fotos_Secundarias" FunctionName="TECresModel.Store.Fotos_Secundarias">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TECresModel.Fotos_Secundarias_Result">
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="id_propiedad" ColumnName="id_propiedad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ObtenerCantones" FunctionName="TECresModel.Store.ObtenerCantones" />
+          <FunctionImportMapping FunctionImportName="ObtenerDistritos" FunctionName="TECresModel.Store.ObtenerDistritos" />
+          <FunctionImportMapping FunctionImportName="ReporteVentas" FunctionName="TECresModel.Store.ReporteVentas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TECresModel.ReporteVentas_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Monto_Facturado" ColumnName="Monto_Facturado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="TECresModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="TECresModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="TECresModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="TECresModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TECresModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="TECresModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TECresModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="TECresModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="TECresModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="ReporteVencer" FunctionName="TECresModel.Store.ReporteVencer">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TECresModel.ReporteVencer_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+                <ScalarProperty Name="Vence" ColumnName="Vence" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Comisiones" FunctionName="TECresModel.Store.Comisiones">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TECresModel.Comisiones_Result">
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Inicio" ColumnName="Inicio" />
+                <ScalarProperty Name="Fin" ColumnName="Fin" />
+                <ScalarProperty Name="Modalidad" ColumnName="Modalidad" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Publico" ColumnName="Publico" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="CostoAnuncio" ColumnName="CostoAnuncio" />
+                <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+                <ScalarProperty Name="Comision" ColumnName="Comision" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

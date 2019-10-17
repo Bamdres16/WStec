@@ -168,6 +168,7 @@
     <Compile Include="Controllers\InmuebleController.cs" />
     <Compile Include="Controllers\OcupacionController.cs" />
     <Compile Include="Controllers\Perfil_clienteController.cs" />
+    <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\Tipo_anuncioController.cs" />
     <Compile Include="Controllers\UbicacionController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

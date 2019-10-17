@@ -184,6 +184,7 @@
     <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="costo_diario" Type="Double" />
     <Property Name="id_anuncio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Duracion" Type="Int32" />
     <NavigationProperty Name="Anuncio" Relationship="Self.FK_TIPOANUNCIO" FromRole="Tipo_anuncio" ToRole="Anuncio" />
   </EntityType>
   <EntityType Name="Tipo_Inmueble">
@@ -573,11 +574,15 @@
       <End Role="Ubicacion" EntitySet="Ubicacion" />
       <End Role="Publico" EntitySet="Publico" />
     </AssociationSet>
+    <FunctionImport Name="Anunciosporaprobar" ReturnType="Collection(TECresModel.Anunciosporaprobar_Result)" />
     <FunctionImport Name="Filtros" ReturnType="Collection(TECresModel.Filtros_Result)">
       <Parameter Name="Habitaciones" Mode="In" Type="Int32" />
       <Parameter Name="PrecioMin" Mode="In" Type="Int32" />
       <Parameter Name="PrecioMax" Mode="In" Type="Int32" />
       <Parameter Name="Ubicacion" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Fotos_Secundarias" ReturnType="Collection(TECresModel.Fotos_Secundarias_Result)">
+      <Parameter Name="id_propiedad" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="ObtenerCantones" ReturnType="Collection(String)">
       <Parameter Name="Provincia" Mode="In" Type="String" />
@@ -586,11 +591,58 @@
       <Parameter Name="Provincia" Mode="In" Type="String" />
       <Parameter Name="Canton" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="Fotos_Secundarias" ReturnType="Collection(TECresModel.Fotos_Secundarias_Result)">
-      <Parameter Name="id_propiedad" Mode="In" Type="Int32" />
+    <FunctionImport Name="ReporteVentas" ReturnType="Collection(TECresModel.ReporteVentas_Result)">
+      <Parameter Name="inicio" Mode="In" Type="DateTime" />
+      <Parameter Name="fin" Mode="In" Type="DateTime" />
     </FunctionImport>
-    <FunctionImport Name="Anunciosporaprobar" ReturnType="Collection(TECresModel.Anunciosporaprobar_Result)" />
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(TECresModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(TECresModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="ReporteVencer" ReturnType="Collection(TECresModel.ReporteVencer_Result)" />
+    <FunctionImport Name="Comisiones" ReturnType="Collection(TECresModel.Comisiones_Result)" />
   </EntityContainer>
+  <ComplexType Name="Anunciosporaprobar_Result">
+    <Property Type="String" Name="modalidad" Nullable="false" MaxLength="30" />
+    <Property Type="DateTime" Name="inicio" Nullable="false" />
+    <Property Type="DateTime" Name="fin" Nullable="false" />
+    <Property Type="String" Name="tarjeta_credito" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="titulo" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="visitas" Nullable="false" />
+    <Property Type="Int32" Name="vendedor" Nullable="false" />
+    <Property Type="Int32" Name="aprobado_por" Nullable="true" />
+    <Property Type="Int32" Name="publico" Nullable="false" />
+    <Property Type="String" Name="tipo_anuncio" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="id_cliente" Nullable="false" />
+    <Property Type="Int32" Name="id_propiedad" Nullable="false" />
+    <Property Type="Double" Name="precio" Nullable="false" />
+  </ComplexType>
   <ComplexType Name="Filtros_Result">
     <Property Type="String" Name="foto_principal" Nullable="false" MaxLength="150" />
     <Property Type="String" Name="provincia" Nullable="false" MaxLength="50" />
@@ -606,19 +658,38 @@
     <Property Type="String" Name="direccion" Nullable="false" MaxLength="150" />
     <Property Type="Int32" Name="id_propiedad" Nullable="false" />
   </ComplexType>
-  <ComplexType Name="Anunciosporaprobar_Result">
-    <Property Type="String" Name="modalidad" Nullable="false" MaxLength="30" />
-    <Property Type="DateTime" Name="inicio" Nullable="false" />
-    <Property Type="DateTime" Name="fin" Nullable="false" />
-    <Property Type="String" Name="tarjeta_credito" Nullable="false" MaxLength="30" />
-    <Property Type="String" Name="titulo" Nullable="false" MaxLength="100" />
-    <Property Type="Int32" Name="visitas" Nullable="false" />
-    <Property Type="Int32" Name="vendedor" Nullable="false" />
-    <Property Type="Int32" Name="aprobado_por" Nullable="true" />
-    <Property Type="Int32" Name="publico" Nullable="false" />
-    <Property Type="String" Name="tipo_anuncio" Nullable="false" MaxLength="20" />
-    <Property Type="Int32" Name="id_cliente" Nullable="false" />
-    <Property Type="Int32" Name="id_propiedad" Nullable="false" />
-    <Property Type="Double" Name="precio" Nullable="false" />
+  <ComplexType Name="ReporteVentas_Result">
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="62" />
+    <Property Type="String" Name="Titulo" Nullable="false" MaxLength="30" />
+    <Property Type="Double" Name="Monto_Facturado" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ReporteVencer_Result">
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="62" />
+    <Property Type="String" Name="Titulo" Nullable="false" MaxLength="30" />
+    <Property Type="Int32" Name="Vendedor" Nullable="false" />
+    <Property Type="DateTime" Name="Vence" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Comisiones_Result">
+    <Property Type="String" Name="Titulo" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="Inicio" Nullable="false" />
+    <Property Type="DateTime" Name="Fin" Nullable="false" />
+    <Property Type="String" Name="Modalidad" Nullable="false" MaxLength="30" />
+    <Property Type="Double" Name="Precio" Nullable="false" />
+    <Property Type="Int32" Name="Publico" Nullable="false" />
+    <Property Type="String" Name="Tipo" Nullable="false" MaxLength="20" />
+    <Property Type="Double" Name="CostoAnuncio" Nullable="true" />
+    <Property Type="String" Name="Vendedor" Nullable="false" MaxLength="62" />
+    <Property Type="Double" Name="Comision" Nullable="true" />
   </ComplexType>
 </Schema>

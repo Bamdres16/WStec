@@ -24,6 +24,7 @@ namespace TECres.Datos.Model
         public string nombre { get; set; }
         public Nullable<double> costo_diario { get; set; }
         public int id_anuncio { get; set; }
+        public Nullable<int> Duracion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Anuncio> Anuncio { get; set; }

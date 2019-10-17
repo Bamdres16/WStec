@@ -33,6 +33,8 @@ namespace TECresCliente.Controllers
 
             
             var Propiedades_Cliente = from pc in db.Propiedad
+                                      join u in db.Ubicacion
+                                      on pc.ubicacion equals u.id
                                       where pc.id_dueno == cedula
                                       select new
                                       {
@@ -46,7 +48,7 @@ namespace TECresCliente.Controllers
                                           pc.espacios_parqueo,
                                           pc.parqueo_visitas,
                                           pc.titulo,
-                                          pc.ubicacion,
+                                          ubicacion = new {u.provincia, u.canton, u.distrito},
                                           pc.id_dueno,
                                           pc.inmueble,
                                           pc.id_propiedad,
@@ -61,7 +63,8 @@ namespace TECresCliente.Controllers
             {
                 
                 var fotos = db.Fotos_Secundarias(pc.id_propiedad);
-               
+                
+                
                 
                 foto_p = appPicture.convertir(path + pc.foto_principal);
                 obj.Add(new
@@ -76,7 +79,7 @@ namespace TECresCliente.Controllers
                     pc.espacios_parqueo,
                     pc.parqueo_visitas,
                     pc.titulo,
-                    pc.ubicacion,
+                    ubicacion = pc.ubicacion.provincia + ' '+pc.ubicacion.canton + ' ' +pc.ubicacion.distrito,
                     pc.id_dueno,
                     pc.inmueble,
                     pc.id_propiedad,

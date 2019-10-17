@@ -26,7 +26,7 @@ namespace TECresWS.Controllers
         public object GetTipo_anuncio()
         {
             return from ta in db.Tipo_anuncio
-                   select new { ta.descripcion, ta.nombre, ta.costo_diario, ta.id_anuncio };
+                   select new { ta.descripcion, ta.nombre, ta.costo_diario, ta.id_anuncio, ta.Duracion };
         }
 
         // GET: api/Tipo_anuncio/5

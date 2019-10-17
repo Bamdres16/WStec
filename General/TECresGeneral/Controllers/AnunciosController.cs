@@ -181,7 +181,17 @@ namespace TECresGeneral.Controllers
         // POST: api/Anuncios
         [ResponseType(typeof(Anuncio))]
         public IHttpActionResult PostAnuncio(Anuncio anuncio)
+
         {
+            var Duracion = (from a in db.Tipo_anuncio 
+                            where a.nombre == anuncio.tipo_anuncio
+                            select a.Duracion);
+                          
+            foreach (int d in Duracion)
+            {
+                anuncio.fin = anuncio.inicio.Date.AddDays(7*d);
+            }
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

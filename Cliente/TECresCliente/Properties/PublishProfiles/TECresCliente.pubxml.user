@@ -292,19 +292,19 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>11/28/2018 13:04:24</publishTime>
     </File>
     <File Include="bin/TECres.Datos.dll">
-      <publishTime>10/17/2019 01:04:18</publishTime>
+      <publishTime>10/17/2019 16:47:48</publishTime>
     </File>
     <File Include="bin/TECres.Datos.dll.config">
-      <publishTime>10/16/2019 06:44:25</publishTime>
+      <publishTime>10/17/2019 16:00:56</publishTime>
     </File>
     <File Include="bin/TECres.Datos.pdb">
-      <publishTime>10/17/2019 01:04:18</publishTime>
+      <publishTime>10/17/2019 16:47:48</publishTime>
     </File>
     <File Include="bin/TECresCliente.dll">
-      <publishTime>10/17/2019 11:02:40</publishTime>
+      <publishTime>10/17/2019 16:47:53</publishTime>
     </File>
     <File Include="bin/TECresCliente.pdb">
-      <publishTime>10/17/2019 11:02:40</publishTime>
+      <publishTime>10/17/2019 16:47:53</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>01/23/2014 13:57:34</publishTime>

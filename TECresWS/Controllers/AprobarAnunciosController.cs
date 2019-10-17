@@ -4,9 +4,9 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using TECres.Datos.Model;
+using System.Web;
 
 namespace TECresWS.Controllers
 {
@@ -55,6 +55,11 @@ namespace TECresWS.Controllers
         private bool AnuncioExists(int id)
         {
             return db.Anuncio.Count(e => e.id_propiedad == id) > 0;
+        }
+        public IHttpActionResult Options()
+        {
+            HttpContext.Current.Response.AppendHeader("Allow", "GET,DELETE,PUT,POST,OPTIONS");
+            return Ok();
         }
     }
 }
