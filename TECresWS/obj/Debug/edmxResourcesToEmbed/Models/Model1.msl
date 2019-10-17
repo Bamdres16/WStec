@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TECresModelStoreContainer" CdmEntityContainer="TECresEntities">
+    <EntitySetMapping Name="Administrador">
+      <EntityTypeMapping TypeName="TECresModel.Administrador">
+        <MappingFragment StoreEntitySet="Administrador">
+          <ScalarProperty Name="nacimiento" ColumnName="nacimiento" />
+          <ScalarProperty Name="ingreso" ColumnName="ingreso" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido1" ColumnName="apellido1" />
+          <ScalarProperty Name="apellido2" ColumnName="apellido2" />
+          <ScalarProperty Name="cedula" ColumnName="cedula" />
+          <ScalarProperty Name="id_admin" ColumnName="id_admin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Anuncio">
+      <EntityTypeMapping TypeName="TECresModel.Anuncio">
+        <MappingFragment StoreEntitySet="Anuncio">
+          <ScalarProperty Name="modalidad" ColumnName="modalidad" />
+          <ScalarProperty Name="inicio" ColumnName="inicio" />
+          <ScalarProperty Name="fin" ColumnName="fin" />
+          <ScalarProperty Name="tarjeta_credito" ColumnName="tarjeta_credito" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="visitas" ColumnName="visitas" />
+          <ScalarProperty Name="vendedor" ColumnName="vendedor" />
+          <ScalarProperty Name="aprobado_por" ColumnName="aprobado_por" />
+          <ScalarProperty Name="publico" ColumnName="publico" />
+          <ScalarProperty Name="tipo_anuncio" ColumnName="tipo_anuncio" />
+          <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+          <ScalarProperty Name="id_propiedad" ColumnName="id_propiedad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="TECresModel.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido1" ColumnName="apellido1" />
+          <ScalarProperty Name="apellido2" ColumnName="apellido2" />
+          <ScalarProperty Name="nacionalidad" ColumnName="nacionalidad" />
+          <ScalarProperty Name="cedula" ColumnName="cedula" />
+          <ScalarProperty Name="correo" ColumnName="correo" />
+          <ScalarProperty Name="usuario" ColumnName="usuario" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+          <ScalarProperty Name="id_perfil" ColumnName="id_perfil" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Foto_Secundaria">
+      <EntityTypeMapping TypeName="TECresModel.Foto_Secundaria">
+        <MappingFragment StoreEntitySet="Foto_Secundaria">
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="id_propiedad" ColumnName="id_propiedad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Gestion_vendedores">
+      <EntityTypeMapping TypeName="TECresModel.Gestion_vendedores">
+        <MappingFragment StoreEntitySet="Gestion_vendedores">
+          <ScalarProperty Name="administrador" ColumnName="administrador" />
+          <ScalarProperty Name="vendedor" ColumnName="vendedor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Interesado">
+      <EntityTypeMapping TypeName="TECresModel.Interesado">
+        <MappingFragment StoreEntitySet="Interesado">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ingresos_mes" ColumnName="ingresos_mes" />
+          <ScalarProperty Name="nacimiento" ColumnName="nacimiento" />
+          <ScalarProperty Name="genero" ColumnName="genero" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido1" ColumnName="apellido1" />
+          <ScalarProperty Name="apellido2" ColumnName="apellido2" />
+          <ScalarProperty Name="id_ocupacion" ColumnName="id_ocupacion" />
+          <ScalarProperty Name="id_ubicacion" ColumnName="id_ubicacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mensaje">
+      <EntityTypeMapping TypeName="TECresModel.Mensaje">
+        <MappingFragment StoreEntitySet="Mensaje">
+          <ScalarProperty Name="contenido" ColumnName="contenido" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="id_emisor" ColumnName="id_emisor" />
+          <ScalarProperty Name="id_receptor" ColumnName="id_receptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nacionalidad">
+      <EntityTypeMapping TypeName="TECresModel.Nacionalidad">
+        <MappingFragment StoreEntitySet="Nacionalidad">
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="pais" ColumnName="pais" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ocupacion">
+      <EntityTypeMapping TypeName="TECresModel.Ocupacion">
+        <MappingFragment StoreEntitySet="Ocupacion">
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="identificador" ColumnName="identificador" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Perfil_cliente">
+      <EntityTypeMapping TypeName="TECresModel.Perfil_cliente">
+        <MappingFragment StoreEntitySet="Perfil_cliente">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="incorporado_por" ColumnName="incorporado_por" />
+          <ScalarProperty Name="id_perfil" ColumnName="id_perfil" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Propiedad">
+      <EntityTypeMapping TypeName="TECresModel.Propiedad">
+        <MappingFragment StoreEntitySet="Propiedad">
+          <ScalarProperty Name="tamano_construccion" ColumnName="tamano_construccion" />
+          <ScalarProperty Name="tamano_terreno" ColumnName="tamano_terreno" />
+          <ScalarProperty Name="niveles" ColumnName="niveles" />
+          <ScalarProperty Name="tipo_piso" ColumnName="tipo_piso" />
+          <ScalarProperty Name="piscina" ColumnName="piscina" />
+          <ScalarProperty Name="gimnasio" ColumnName="gimnasio" />
+          <ScalarProperty Name="cantidad_banos" ColumnName="cantidad_banos" />
+          <ScalarProperty Name="cant_habitaciones" ColumnName="cant_habitaciones" />
+          <ScalarProperty Name="espacios_parqueo" ColumnName="espacios_parqueo" />
+          <ScalarProperty Name="parqueo_visitas" ColumnName="parqueo_visitas" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
+          <ScalarProperty Name="id_dueno" ColumnName="id_dueno" />
+          <ScalarProperty Name="inmueble" ColumnName="inmueble" />
+          <ScalarProperty Name="id_propiedad" ColumnName="id_propiedad" />
+          <ScalarProperty Name="foto_principal" ColumnName="foto_principal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Publico">
+      <EntityTypeMapping TypeName="TECresModel.Publico">
+        <MappingFragment StoreEntitySet="Publico">
+          <ScalarProperty Name="rango_edad" ColumnName="rango_edad" />
+          <ScalarProperty Name="ingresos" ColumnName="ingresos" />
+          <ScalarProperty Name="genero" ColumnName="genero" />
+          <ScalarProperty Name="id_publico" ColumnName="id_publico" />
+          <ScalarProperty Name="id_ubicacion" ColumnName="id_ubicacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="TECresModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tipo_anuncio">
+      <EntityTypeMapping TypeName="TECresModel.Tipo_anuncio">
+        <MappingFragment StoreEntitySet="Tipo_anuncio">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="costo_diario" ColumnName="costo_diario" />
+          <ScalarProperty Name="id_anuncio" ColumnName="id_anuncio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tipo_Inmueble">
+      <EntityTypeMapping TypeName="TECresModel.Tipo_Inmueble">
+        <MappingFragment StoreEntitySet="Tipo_Inmueble">
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="definido_por" ColumnName="definido_por" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ubicacion">
+      <EntityTypeMapping TypeName="TECresModel.Ubicacion">
+        <MappingFragment StoreEntitySet="Ubicacion">
+          <ScalarProperty Name="provincia" ColumnName="provincia" />
+          <ScalarProperty Name="canton" ColumnName="canton" />
+          <ScalarProperty Name="distrito" ColumnName="distrito" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vendedor">
+      <EntityTypeMapping TypeName="TECresModel.Vendedor">
+        <MappingFragment StoreEntitySet="Vendedor">
+          <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido1" ColumnName="apellido1" />
+          <ScalarProperty Name="apellido2" ColumnName="apellido2" />
+          <ScalarProperty Name="cedula" ColumnName="cedula" />
+          <ScalarProperty Name="id_vendedor" ColumnName="id_vendedor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ObtenerCantones" FunctionName="TECresModel.Store.ObtenerCantones" />
+    <FunctionImportMapping FunctionImportName="ObtenerDistritos" FunctionName="TECresModel.Store.ObtenerDistritos" />
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,10 @@
+D:\Documentos\Api\TECres\TECres.Datos\bin\Debug\TECres.Datos.dll.config
+D:\Documentos\Api\TECres\TECres.Datos\bin\Debug\TECres.Datos.dll
+D:\Documentos\Api\TECres\TECres.Datos\bin\Debug\TECres.Datos.pdb
+D:\Documentos\Api\TECres\TECres.Datos\bin\Debug\EntityFramework.SqlServer.dll
+D:\Documentos\Api\TECres\TECres.Datos\bin\Debug\EntityFramework.dll
+D:\Documentos\Api\TECres\TECres.Datos\obj\Debug\TECres.Datos.csprojAssemblyReference.cache
+D:\Documentos\Api\TECres\TECres.Datos\obj\Debug\TECres.Datos.csproj.CoreCompileInputs.cache
+D:\Documentos\Api\TECres\TECres.Datos\obj\Debug\TECres.Datos.csproj.CopyComplete
+D:\Documentos\Api\TECres\TECres.Datos\obj\Debug\TECres.Datos.dll
+D:\Documentos\Api\TECres\TECres.Datos\obj\Debug\TECres.Datos.pdb

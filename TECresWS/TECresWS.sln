@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TECresWS", "TECresWS.csproj", "{1180A382-A2F0-4EFD-B129-1C24AE3550FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TECresCliente", "..\Cliente\TECresCliente\TECresCliente.csproj", "{829357D2-3119-4E6D-B53D-3B6BED231F6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TECresGeneral", "..\General\TECresGeneral\TECresGeneral.csproj", "{EC6B1F8F-A1D3-45B2-A074-5DE33860043A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TECres.Datos", "..\TECres.Datos\TECres.Datos.csproj", "{4CF7435A-5446-4C04-8E3C-A71382F8AD6B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1180A382-A2F0-4EFD-B129-1C24AE3550FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1180A382-A2F0-4EFD-B129-1C24AE3550FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1180A382-A2F0-4EFD-B129-1C24AE3550FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1180A382-A2F0-4EFD-B129-1C24AE3550FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{829357D2-3119-4E6D-B53D-3B6BED231F6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{829357D2-3119-4E6D-B53D-3B6BED231F6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{829357D2-3119-4E6D-B53D-3B6BED231F6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{829357D2-3119-4E6D-B53D-3B6BED231F6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC6B1F8F-A1D3-45B2-A074-5DE33860043A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC6B1F8F-A1D3-45B2-A074-5DE33860043A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC6B1F8F-A1D3-45B2-A074-5DE33860043A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC6B1F8F-A1D3-45B2-A074-5DE33860043A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CF7435A-5446-4C04-8E3C-A71382F8AD6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CF7435A-5446-4C04-8E3C-A71382F8AD6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CF7435A-5446-4C04-8E3C-A71382F8AD6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CF7435A-5446-4C04-8E3C-A71382F8AD6B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0C4E0F60-C2EF-46AC-A414-4FEDFE190658}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,551 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TECresModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Administrador">
+    <Key>
+      <PropertyRef Name="id_admin" />
+    </Key>
+    <Property Name="nacimiento" Type="date" Nullable="false" />
+    <Property Name="ingreso" Type="date" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="apellido1" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="apellido2" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="cedula" Type="int" Nullable="false" />
+    <Property Name="id_admin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Anuncio">
+    <Key>
+      <PropertyRef Name="id_propiedad" />
+    </Key>
+    <Property Name="modalidad" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="inicio" Type="date" Nullable="false" />
+    <Property Name="fin" Type="date" Nullable="false" />
+    <Property Name="tarjeta_credito" Type="int" Nullable="false" />
+    <Property Name="titulo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="visitas" Type="int" Nullable="false" />
+    <Property Name="vendedor" Type="int" Nullable="false" />
+    <Property Name="aprobado_por" Type="int" />
+    <Property Name="publico" Type="int" Nullable="false" />
+    <Property Name="tipo_anuncio" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="id_cliente" Type="int" Nullable="false" />
+    <Property Name="id_propiedad" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="cedula" />
+    </Key>
+    <Property Name="nombre" Type="varchar" MaxLength="20" />
+    <Property Name="apellido1" Type="varchar" MaxLength="20" />
+    <Property Name="apellido2" Type="varchar" MaxLength="20" />
+    <Property Name="nacionalidad" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="cedula" Type="int" Nullable="false" />
+    <Property Name="correo" Type="varchar" MaxLength="70" Nullable="false" />
+    <Property Name="usuario" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="pass" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="id_perfil" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Foto_Secundaria">
+    <Key>
+      <PropertyRef Name="direccion" />
+    </Key>
+    <Property Name="direccion" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="id_propiedad" Type="int" />
+  </EntityType>
+  <EntityType Name="Gestion_vendedores">
+    <Key>
+      <PropertyRef Name="administrador" />
+      <PropertyRef Name="vendedor" />
+    </Key>
+    <Property Name="administrador" Type="int" Nullable="false" />
+    <Property Name="vendedor" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Interesado">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ingresos_mes" Type="float" />
+    <Property Name="nacimiento" Type="date" />
+    <Property Name="genero" Type="varchar" MaxLength="1" />
+    <Property Name="nombre" Type="varchar" MaxLength="20" />
+    <Property Name="apellido1" Type="varchar" MaxLength="20" />
+    <Property Name="apellido2" Type="varchar" MaxLength="20" />
+    <Property Name="id_ocupacion" Type="int" Nullable="false" />
+    <Property Name="id_ubicacion" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Mensaje">
+    <Key>
+      <PropertyRef Name="id_emisor" />
+      <PropertyRef Name="id_receptor" />
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="contenido" Type="varchar" MaxLength="300" />
+    <Property Name="fecha" Type="date" Nullable="false" />
+    <Property Name="id_emisor" Type="int" Nullable="false" />
+    <Property Name="id_receptor" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Nacionalidad">
+    <Key>
+      <PropertyRef Name="nombre" />
+    </Key>
+    <Property Name="nombre" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="pais" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Ocupacion">
+    <Key>
+      <PropertyRef Name="identificador" />
+    </Key>
+    <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="identificador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Perfil_cliente">
+    <Key>
+      <PropertyRef Name="nombre" />
+    </Key>
+    <Property Name="descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="incorporado_por" Type="int" />
+    <Property Name="id_perfil" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Propiedad">
+    <Key>
+      <PropertyRef Name="id_propiedad" />
+    </Key>
+    <Property Name="tamano_construccion" Type="float" Nullable="false" />
+    <Property Name="tamano_terreno" Type="float" Nullable="false" />
+    <Property Name="niveles" Type="int" Nullable="false" />
+    <Property Name="tipo_piso" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="piscina" Type="bit" Nullable="false" />
+    <Property Name="gimnasio" Type="bit" Nullable="false" />
+    <Property Name="cantidad_banos" Type="int" Nullable="false" />
+    <Property Name="cant_habitaciones" Type="int" Nullable="false" />
+    <Property Name="espacios_parqueo" Type="int" Nullable="false" />
+    <Property Name="parqueo_visitas" Type="bit" Nullable="false" />
+    <Property Name="titulo" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="ubicacion" Type="int" Nullable="false" />
+    <Property Name="id_dueno" Type="int" />
+    <Property Name="inmueble" Type="varchar" MaxLength="20" />
+    <Property Name="id_propiedad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="foto_principal" Type="varchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Publico">
+    <Key>
+      <PropertyRef Name="id_publico" />
+    </Key>
+    <Property Name="rango_edad" Type="int" />
+    <Property Name="ingresos" Type="float" />
+    <Property Name="genero" Type="int" />
+    <Property Name="id_publico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_ubicacion" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Tipo_anuncio">
+    <Key>
+      <PropertyRef Name="nombre" />
+    </Key>
+    <Property Name="descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="costo_diario" Type="float" />
+    <Property Name="id_anuncio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tipo_Inmueble">
+    <Key>
+      <PropertyRef Name="Tipo" />
+    </Key>
+    <Property Name="Tipo" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="definido_por" Type="int" />
+  </EntityType>
+  <EntityType Name="Ubicacion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="provincia" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="canton" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="distrito" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vendedor">
+    <Key>
+      <PropertyRef Name="id_vendedor" />
+    </Key>
+    <Property Name="fecha_ingreso" Type="date" />
+    <Property Name="nombre" Type="varchar" MaxLength="20" />
+    <Property Name="apellido1" Type="varchar" MaxLength="20" />
+    <Property Name="apellido2" Type="varchar" MaxLength="20" />
+    <Property Name="cedula" Type="int" Nullable="false" />
+    <Property Name="id_vendedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <Association Name="DUENOPROPIEDAD">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+    <End Role="Propiedad" Type="Self.Propiedad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="cedula" />
+      </Principal>
+      <Dependent Role="Propiedad">
+        <PropertyRef Name="id_dueno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ANUNCIOAPROBADO">
+    <End Role="Administrador" Type="Self.Administrador" Multiplicity="0..1" />
+    <End Role="Anuncio" Type="Self.Anuncio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrador">
+        <PropertyRef Name="id_admin" />
+      </Principal>
+      <Dependent Role="Anuncio">
+        <PropertyRef Name="aprobado_por" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CLIENTEANUNCIO">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+    <End Role="Anuncio" Type="Self.Anuncio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="cedula" />
+      </Principal>
+      <Dependent Role="Anuncio">
+        <PropertyRef Name="id_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ENCARGADO">
+    <End Role="Administrador" Type="Self.Administrador" Multiplicity="1" />
+    <End Role="Gestion_vendedores" Type="Self.Gestion_vendedores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrador">
+        <PropertyRef Name="id_admin" />
+      </Principal>
+      <Dependent Role="Gestion_vendedores">
+        <PropertyRef Name="administrador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ENVIAMENSAJE">
+    <End Role="Interesado" Type="Self.Interesado" Multiplicity="1" />
+    <End Role="Mensaje" Type="Self.Mensaje" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Interesado">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Mensaje">
+        <PropertyRef Name="id_emisor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FOTOSPROPIEDAD">
+    <End Role="Propiedad" Type="Self.Propiedad" Multiplicity="0..1" />
+    <End Role="Foto_Secundaria" Type="Self.Foto_Secundaria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Propiedad">
+        <PropertyRef Name="id_propiedad" />
+      </Principal>
+      <Dependent Role="Foto_Secundaria">
+        <PropertyRef Name="id_propiedad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INMUEBLEPROPIEDAD">
+    <End Role="Tipo_Inmueble" Type="Self.Tipo_Inmueble" Multiplicity="0..1" />
+    <End Role="Propiedad" Type="Self.Propiedad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo_Inmueble">
+        <PropertyRef Name="Tipo" />
+      </Principal>
+      <Dependent Role="Propiedad">
+        <PropertyRef Name="inmueble" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_nacionalidadCliente">
+    <End Role="Nacionalidad" Type="Self.Nacionalidad" Multiplicity="1" />
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nacionalidad">
+        <PropertyRef Name="nombre" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="nacionalidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OCUPACIONINTERESADO">
+    <End Role="Ocupacion" Type="Self.Ocupacion" Multiplicity="1" />
+    <End Role="Interesado" Type="Self.Interesado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ocupacion">
+        <PropertyRef Name="identificador" />
+      </Principal>
+      <Dependent Role="Interesado">
+        <PropertyRef Name="id_ocupacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_perfilCliente">
+    <End Role="Perfil_cliente" Type="Self.Perfil_cliente" Multiplicity="1" />
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Perfil_cliente">
+        <PropertyRef Name="nombre" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="id_perfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PERFILPOR">
+    <End Role="Administrador" Type="Self.Administrador" Multiplicity="0..1" />
+    <End Role="Perfil_cliente" Type="Self.Perfil_cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrador">
+        <PropertyRef Name="id_admin" />
+      </Principal>
+      <Dependent Role="Perfil_cliente">
+        <PropertyRef Name="incorporado_por" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PROPIEDADANUNCIO">
+    <End Role="Propiedad" Type="Self.Propiedad" Multiplicity="1" />
+    <End Role="Anuncio" Type="Self.Anuncio" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Propiedad">
+        <PropertyRef Name="id_propiedad" />
+      </Principal>
+      <Dependent Role="Anuncio">
+        <PropertyRef Name="id_propiedad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PUBLICOANUNCIO">
+    <End Role="Publico" Type="Self.Publico" Multiplicity="1" />
+    <End Role="Anuncio" Type="Self.Anuncio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Publico">
+        <PropertyRef Name="id_publico" />
+      </Principal>
+      <Dependent Role="Anuncio">
+        <PropertyRef Name="publico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RECIBEMENSAJE">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+    <End Role="Mensaje" Type="Self.Mensaje" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="cedula" />
+      </Principal>
+      <Dependent Role="Mensaje">
+        <PropertyRef Name="id_receptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TIPOANUNCIO">
+    <End Role="Tipo_anuncio" Type="Self.Tipo_anuncio" Multiplicity="1" />
+    <End Role="Anuncio" Type="Self.Anuncio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo_anuncio">
+        <PropertyRef Name="nombre" />
+      </Principal>
+      <Dependent Role="Anuncio">
+        <PropertyRef Name="tipo_anuncio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TIPODEFINIDO">
+    <End Role="Administrador" Type="Self.Administrador" Multiplicity="0..1" />
+    <End Role="Tipo_Inmueble" Type="Self.Tipo_Inmueble" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrador">
+        <PropertyRef Name="id_admin" />
+      </Principal>
+      <Dependent Role="Tipo_Inmueble">
+        <PropertyRef Name="definido_por" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UBICACIONINTERESADO">
+    <End Role="Ubicacion" Type="Self.Ubicacion" Multiplicity="1" />
+    <End Role="Interesado" Type="Self.Interesado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ubicacion">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Interesado">
+        <PropertyRef Name="id_ubicacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UBICACIONPROPIEDAD">
+    <End Role="Ubicacion" Type="Self.Ubicacion" Multiplicity="1" />
+    <End Role="Propiedad" Type="Self.Propiedad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ubicacion">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Propiedad">
+        <PropertyRef Name="ubicacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UbicacionPublico">
+    <End Role="Ubicacion" Type="Self.Ubicacion" Multiplicity="0..1" />
+    <End Role="Publico" Type="Self.Publico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ubicacion">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Publico">
+        <PropertyRef Name="id_ubicacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VENDEDOR">
+    <End Role="Vendedor" Type="Self.Vendedor" Multiplicity="1" />
+    <End Role="Gestion_vendedores" Type="Self.Gestion_vendedores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendedor">
+        <PropertyRef Name="id_vendedor" />
+      </Principal>
+      <Dependent Role="Gestion_vendedores">
+        <PropertyRef Name="vendedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VENDEDORANUNCIO">
+    <End Role="Vendedor" Type="Self.Vendedor" Multiplicity="1" />
+    <End Role="Anuncio" Type="Self.Anuncio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendedor">
+        <PropertyRef Name="id_vendedor" />
+      </Principal>
+      <Dependent Role="Anuncio">
+        <PropertyRef Name="vendedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="ObtenerCantones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Provincia" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="ObtenerDistritos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Provincia" Type="varchar" Mode="In" />
+    <Parameter Name="Canton" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="TECresModelStoreContainer">
+    <EntitySet Name="Administrador" EntityType="Self.Administrador" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Anuncio" EntityType="Self.Anuncio" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Foto_Secundaria" EntityType="Self.Foto_Secundaria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gestion_vendedores" EntityType="Self.Gestion_vendedores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Interesado" EntityType="Self.Interesado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mensaje" EntityType="Self.Mensaje" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Nacionalidad" EntityType="Self.Nacionalidad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ocupacion" EntityType="Self.Ocupacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Perfil_cliente" EntityType="Self.Perfil_cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Propiedad" EntityType="Self.Propiedad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Publico" EntityType="Self.Publico" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tipo_anuncio" EntityType="Self.Tipo_anuncio" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tipo_Inmueble" EntityType="Self.Tipo_Inmueble" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ubicacion" EntityType="Self.Ubicacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vendedor" EntityType="Self.Vendedor" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="DUENOPROPIEDAD" Association="Self.DUENOPROPIEDAD">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Propiedad" EntitySet="Propiedad" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ANUNCIOAPROBADO" Association="Self.FK_ANUNCIOAPROBADO">
+      <End Role="Administrador" EntitySet="Administrador" />
+      <End Role="Anuncio" EntitySet="Anuncio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CLIENTEANUNCIO" Association="Self.FK_CLIENTEANUNCIO">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Anuncio" EntitySet="Anuncio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ENCARGADO" Association="Self.FK_ENCARGADO">
+      <End Role="Administrador" EntitySet="Administrador" />
+      <End Role="Gestion_vendedores" EntitySet="Gestion_vendedores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ENVIAMENSAJE" Association="Self.FK_ENVIAMENSAJE">
+      <End Role="Interesado" EntitySet="Interesado" />
+      <End Role="Mensaje" EntitySet="Mensaje" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FOTOSPROPIEDAD" Association="Self.FK_FOTOSPROPIEDAD">
+      <End Role="Propiedad" EntitySet="Propiedad" />
+      <End Role="Foto_Secundaria" EntitySet="Foto_Secundaria" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INMUEBLEPROPIEDAD" Association="Self.FK_INMUEBLEPROPIEDAD">
+      <End Role="Tipo_Inmueble" EntitySet="Tipo_Inmueble" />
+      <End Role="Propiedad" EntitySet="Propiedad" />
+    </AssociationSet>
+    <AssociationSet Name="FK_nacionalidadCliente" Association="Self.FK_nacionalidadCliente">
+      <End Role="Nacionalidad" EntitySet="Nacionalidad" />
+      <End Role="Cliente" EntitySet="Cliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OCUPACIONINTERESADO" Association="Self.FK_OCUPACIONINTERESADO">
+      <End Role="Ocupacion" EntitySet="Ocupacion" />
+      <End Role="Interesado" EntitySet="Interesado" />
+    </AssociationSet>
+    <AssociationSet Name="FK_perfilCliente" Association="Self.FK_perfilCliente">
+      <End Role="Perfil_cliente" EntitySet="Perfil_cliente" />
+      <End Role="Cliente" EntitySet="Cliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PERFILPOR" Association="Self.FK_PERFILPOR">
+      <End Role="Administrador" EntitySet="Administrador" />
+      <End Role="Perfil_cliente" EntitySet="Perfil_cliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PROPIEDADANUNCIO" Association="Self.FK_PROPIEDADANUNCIO">
+      <End Role="Propiedad" EntitySet="Propiedad" />
+      <End Role="Anuncio" EntitySet="Anuncio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PUBLICOANUNCIO" Association="Self.FK_PUBLICOANUNCIO">
+      <End Role="Publico" EntitySet="Publico" />
+      <End Role="Anuncio" EntitySet="Anuncio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RECIBEMENSAJE" Association="Self.FK_RECIBEMENSAJE">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Mensaje" EntitySet="Mensaje" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TIPOANUNCIO" Association="Self.FK_TIPOANUNCIO">
+      <End Role="Tipo_anuncio" EntitySet="Tipo_anuncio" />
+      <End Role="Anuncio" EntitySet="Anuncio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TIPODEFINIDO" Association="Self.FK_TIPODEFINIDO">
+      <End Role="Administrador" EntitySet="Administrador" />
+      <End Role="Tipo_Inmueble" EntitySet="Tipo_Inmueble" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UBICACIONINTERESADO" Association="Self.FK_UBICACIONINTERESADO">
+      <End Role="Ubicacion" EntitySet="Ubicacion" />
+      <End Role="Interesado" EntitySet="Interesado" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UBICACIONPROPIEDAD" Association="Self.FK_UBICACIONPROPIEDAD">
+      <End Role="Ubicacion" EntitySet="Ubicacion" />
+      <End Role="Propiedad" EntitySet="Propiedad" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UbicacionPublico" Association="Self.FK_UbicacionPublico">
+      <End Role="Ubicacion" EntitySet="Ubicacion" />
+      <End Role="Publico" EntitySet="Publico" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VENDEDOR" Association="Self.FK_VENDEDOR">
+      <End Role="Vendedor" EntitySet="Vendedor" />
+      <End Role="Gestion_vendedores" EntitySet="Gestion_vendedores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VENDEDORANUNCIO" Association="Self.FK_VENDEDORANUNCIO">
+      <End Role="Vendedor" EntitySet="Vendedor" />
+      <End Role="Anuncio" EntitySet="Anuncio" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
